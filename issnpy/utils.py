@@ -1,6 +1,7 @@
 import json
 import logging
 import requests
+import stdnum.issn
 
 from . import __version__
 
@@ -20,6 +21,17 @@ def get_logger(name="issnpy", loglevel=None):
         if loglevel is not None and logger.level != loglevel:
             logger.setLevel(loglevel)
     return logger
+
+
+def validate(issn):
+    issn = stdnum.issn.format(issn)
+    try:
+        issn = stdnum.issn.validate(issn)
+        return stdnum.issn.format(issn)
+    except stdnum.exception.ValidationError:
+        logger = get_logger()
+        logger.error("Saw invalid ISSN {0}!".format(issn))
+        return None
 
 
 def get_request(url, params={}, headers={}):

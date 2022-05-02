@@ -24,6 +24,26 @@ def _get_issn_l(data, issn):
             return nid.replace(pattern, "")
 
 
+def _get_issn_reference_publication_event(data, issn):
+    response_graph = _get_graph(data)
+    pattern = "resource/ISSN/{0}#ReferencePublicationEvent".format(issn)
+    for node in response_graph:
+        nid = _get_field(node, "@id")
+        if nid == pattern:
+            if "location" in node:
+                return node["location"]
+
+
+def _get_location(data, issn):
+    response_graph = _get_graph(data)
+    pattern = _get_issn_reference_publication_event(data, issn)
+    for node in response_graph:
+        nid = _get_field(node, "@id")
+        if nid == pattern:
+            if "label" in node:
+                return node["label"]
+
+
 def _get_issn_key_title(data, issn):
     response_graph = _get_graph(data)
     pattern = "resource/ISSN/{0}#KeyTitle".format(issn)
@@ -120,6 +140,9 @@ class Parser:
     def get_url(self):
         return _get_url(self.raw, self.id)
 
+    def get_location(self):
+        return _get_location(self.raw, self.id)
+
     def get_format(self):
         return _get_format(self.raw, self.id)
 
@@ -135,6 +158,7 @@ class Parser:
           "issn_l": self.get_issn_l(),
           "title": self.get_key_title(),
           "format": self.get_format(),
+          "location": self.get_location(),
           "status": self.get_status(),
           "modified": self.get_modified(),
           "url": self.get_url()

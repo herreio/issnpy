@@ -4,10 +4,9 @@ from . import utils
 
 class Parser:
 
-    def __init__(self, data, issn, linking=False):
+    def __init__(self, data, issn):
         self.id = issn
         self.raw = data
-        self.linking = linking
 
     @staticmethod
     def _clean_str(char):

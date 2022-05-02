@@ -55,26 +55,26 @@ CIEPS/ISSN International Centre
 
     ...
 
-    "ISSN Data": Contents of the ISSN Register, including the ISSN numbers and
+    *ISSN Data*: Contents of the ISSN Register, including the ISSN numbers and
     associated data elements to identify the serial publications and other
     continuing resources to which ISSN numbers have been assigned. ISSN Data
     includes Released ISSN Data and Complete ISSN Data.
 
     ...
 
-    "Released ISSN Data": Part of the data extracted from the ISSN Register
+    *Released ISSN Data*: Part of the data extracted from the ISSN Register
     concerning a publication, selected by the CIEPS/ISSN International Centre
     and made available to users free of charge via the Free Access Portal.
     This Released ISSN Data is limited to:
 
-      - ISSN
-      - ISSN-L
-      - Title proper
-      - Key-title
-      - Country
-      - Medium
-      - URL of the digital resource
-      - Date of last update.
+    - ISSN
+    - ISSN-L
+    - Title proper
+    - Key-title
+    - Country
+    - Medium
+    - URL of the digital resource
+    - Date of last update.
 
     ...
 

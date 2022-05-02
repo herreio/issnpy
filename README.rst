@@ -45,6 +45,12 @@ Usage Example
     # get parsed data of record (issn_l, related, title)
     record_parsed = record.parse()
 
+Source Data
+===========
+
+See the `linked data application profile <https://www.issn.org/understanding-the-issn/assignment-rules/issn-linked-data-application-profile/>`_
+of the CIEPS/ISSN International Centre for further details.
+
 Usage Terms
 ===========
 

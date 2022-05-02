@@ -48,8 +48,37 @@ Usage Example
 Usage Terms
 ===========
 
-ISSN International Centre
-~~~~~~~~~~~~~~~~~~~~~~~~~
+CIEPS/ISSN International Centre
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    DEFINITIONS
+
+    ...
+
+    "ISSN Data": Contents of the ISSN Register, including the ISSN numbers and
+    associated data elements to identify the serial publications and other
+    continuing resources to which ISSN numbers have been assigned. ISSN Data
+    includes Released ISSN Data and Complete ISSN Data.
+
+    ...
+
+    "Released ISSN Data": Part of the data extracted from the ISSN Register
+    concerning a publication, selected by the CIEPS/ISSN International Centre
+    and made available to users free of charge via the Free Access Portal.
+    This Released ISSN Data is limited to:
+
+      - ISSN
+      - ISSN-L
+      - Title proper
+      - Key-title
+      - Country
+      - Medium
+      - URL of the digital resource
+      - Date of last update.
+
+    ...
+
+    ARTICLE 3: USE RIGHTS GRANTED TO THE LICENSEE
 
     The CIEPS/ISSN International Centre grants the Licensee the non-exclusive,
     personal, non-assignable and non-transferable right to view, extract and
@@ -75,4 +104,4 @@ ISSN International Centre
     ISSN Data thus modified must mention the CIEPS/ISSN International Centre
     as a source.
 
-    https://portal.issn.org/content/license-contract
+    Source: https://portal.issn.org/content/license-contract

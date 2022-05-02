@@ -31,7 +31,7 @@ def validate(issn):
         return stdnum.issn.format(issnf)
     except stdnum.exceptions.ValidationError:
         logger = get_logger()
-        logger.error("ISSN {0} is not valid!".format(issn))
+        logger.error("{0} is not a valid ISSN!".format(issn))
         return None
 
 

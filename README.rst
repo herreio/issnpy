@@ -84,4 +84,4 @@ CIEPS/ISSN International Centre
 
     ...
 
-*Source*: https://portal.issn.org/content/license-contract
+See the `License contract of the ISSN Portal <https://portal.issn.org/content/license-contract>`_ for further details.

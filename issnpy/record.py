@@ -108,28 +108,45 @@ def _get_issn_fields(data, issn):
             return d
 
 
+def _get_issns(data):
+    issns = []
+    response_graph = _get_graph(data)
+    pattern = "resource/ISSN/"
+    for node in response_graph:
+        nid = _get_field(node, "@id")
+        if pattern in nid and len(nid.replace(pattern, "")) == 9:
+            title_issn = nid.replace(pattern, "")
+            title_format = None
+            if "format" in node:
+                title_format = node["format"]
+                title_format = title_format.replace("vocabularies/medium#", "")
+            issns.append({"issn": title_issn, "format": title_format})
+    if len(issns) > 0:
+        return issns
+
+
 def _get_title(data, issn):
     response_graph = _get_graph(data)
-    response_graph_data = _get_issn_fields(response_graph, issn)
-    if response_graph_data and "mainTitle" in response_graph_data:
-        main_title = response_graph_data["mainTitle"]
+    node = _get_issn_fields(response_graph, issn)
+    if node and "mainTitle" in node:
+        main_title = node["mainTitle"]
         return _clean_up(main_title)
 
 
 def _get_format(data, issn):
     response_graph = _get_graph(data)
-    response_graph_data = _get_issn_fields(response_graph, issn)
-    if response_graph_data and "format" in response_graph_data:
-        title_format = response_graph_data["format"]
+    node = _get_issn_fields(response_graph, issn)
+    if node and "format" in node:
+        title_format = node["format"]
         title_format = title_format.replace("vocabularies/medium#", "")
         return title_format
 
 
 def _get_url(data, issn):
     response_graph = _get_graph(data)
-    response_graph_data = _get_issn_fields(response_graph, issn)
-    if response_graph_data and "url" in response_graph_data:
-        return response_graph_data["url"]
+    node = _get_issn_fields(response_graph, issn)
+    if node and "url" in node:
+        return node["url"]
 
 
 class Parser:
@@ -148,6 +165,10 @@ class Parser:
     def get_name(self):
         if self.linking:
             return _get_issn_l_name(self.raw, self.id)
+
+    def get_issns(self):
+        if self.linking:
+            return _get_issns(self.raw)
 
     def get_title(self):
         if not self.linking:
@@ -169,7 +190,8 @@ class Parser:
             return _get_location(self.raw, self.id)
 
     def get_format(self):
-        return _get_format(self.raw, self.id)
+        if not self.linking:
+            return _get_format(self.raw, self.id)
 
     def get_status(self):
         if not self.linking:
@@ -182,10 +204,9 @@ class Parser:
     def parse(self):
         if self.linking:
             return {
-              "issn": self.id,
               "issn_l": self.get_issn_l(),
-              "title": self.get_name(),
-              "format": self.get_format()
+              "related": self.get_issns(),
+              "title": self.get_name()
             }
         else:
             return {

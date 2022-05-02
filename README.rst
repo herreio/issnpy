@@ -42,7 +42,7 @@ Usage Example
     issn_l = issnpy.link(issn)
     # fetch data of record identified by ISSN-L
     record = issnpy.fetch(issn_l, linking=True)
-    # get parsed data of record (issn, issn_l, title, format)
+    # get parsed data of record (issn_l, related, title)
     record_parsed = record.parse()
 
 Usage Terms

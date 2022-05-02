@@ -206,7 +206,7 @@ class ParserIssnL(Parser):
                 if "format" in node:
                     title_format = node["format"]
                     title_format = title_format.replace("vocabularies/medium#", "")
-                issns.append({"issn": title_issn, "format": title_format})
+                issns.append({"id": title_issn, "format": title_format})
         if len(issns) > 0:
             return issns
 

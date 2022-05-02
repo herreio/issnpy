@@ -7,3 +7,4 @@ __author__ = "Donatus Herre <donatus.herre@slub-dresden.de>"
 __version__ = "0.0.0"
 
 from .client import request as fetch
+from .client import request_issn_l as link

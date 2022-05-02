@@ -22,3 +22,9 @@ def request(issn, linking=False):
     payload = utils.json_request(url)
     if payload is not None:
         return Parser(payload, issn, linking=linking)
+
+
+def request_issn_l(issn):
+    result = request(issn, linking=False)
+    if result is not None:
+        return result.get_issn_l()

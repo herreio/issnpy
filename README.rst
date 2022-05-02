@@ -30,6 +30,8 @@ Usage Example
     import issnpy
     # select ISSN of record to fetch
     issn = "2767-3200"
+    # retrieve linking ISSN for given ISSN
+    issn_l = issnpy.link(issn)
     # fetch data of record identified by ISSN
     record = issnpy.fetch(issn)
     # get linked open data graph

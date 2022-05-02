@@ -41,12 +41,12 @@ Usage Example
     # retrieve linking ISSN for given ISSN
     issn_l = issnpy.find_link(issn)
     # fetch data of record identified by ISSN-L
-    record = issnpy.fetch(issn_l, linking=True)
+    record = issnpy.fetch(issn_l, link=True)
     # get parsed data of record (issn_l, related, title)
     record_parsed = record.parse()
     # fetch and parse in one go
     record_parsed = issnpy.record(issn)
-    record_parsed = issnpy.record_link(issn_l)
+    record_parsed = issnpy.link(issn_l)
 
 Source Data
 ===========

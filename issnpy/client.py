@@ -14,17 +14,17 @@ def _build_url_l(issn_l):
     return "{0}/{1}?format=json".format(URL_BASE_ISSN_L, issn_l)
 
 
-def request(issn, linking=False, parse=False):
+def request(issn, link=False, parse=False):
     issn = utils.validate(issn)
     if issn is None:
         return None
-    if not linking:
+    if not link:
         url = _build_url(issn)
     else:
         url = _build_url_l(issn)
     payload = utils.json_request(url)
     if payload is not None:
-        if linking:
+        if link:
             issn_l_data = ParserIssnL(payload, issn)
             if parse:
                 return issn_l_data.parse()
@@ -36,14 +36,14 @@ def request(issn, linking=False, parse=False):
 
 
 def record(issn):
-    return request(issn, linking=False, parse=True)
+    return request(issn, link=False, parse=True)
 
 
-def record_link(issn):
-    return request(issn, linking=True, parse=True)
+def link(issn):
+    return request(issn, link=True, parse=True)
 
 
 def find_link(issn):
-    result = request(issn, linking=False, parse=False)
+    result = request(issn, link=False, parse=False)
     if result is not None:
         return result.get_issn_l()

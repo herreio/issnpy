@@ -38,6 +38,10 @@ Usage Example
     record_context = record.context()
     # get parsed data of record (issn, issn_l, title, format, location, status, modified, url)
     record_parsed = record.parse()
+    # fetch data of record identified by ISSN-L
+    record = issnpy.fetch(issn, linking=True)
+    # get parsed data of record (issn, issn_l, title, format)
+    record_parsed = record.parse()
 
 Usage Terms
 ===========

@@ -1,6 +1,12 @@
 import datetime
 
 
+def _clean_up(char):
+    char = char.strip(".")
+    char = char.strip()
+    return char
+
+
 def _get_field(data, name):
     if name in data:
         if data[name]:
@@ -22,6 +28,17 @@ def _get_issn_l(data, issn):
         nid = _get_field(node, "@id")
         if pattern in nid:
             return nid.replace(pattern, "")
+
+
+def _get_issn_l_name(data, issn):
+    response_graph = _get_graph(data)
+    pattern = "resource/ISSN-L/{0}".format(issn)
+    for node in response_graph:
+        nid = _get_field(node, "@id")
+        if nid == pattern:
+            if "name" in node:
+                name = node["name"]
+                return _clean_up(name)
 
 
 def _get_issn_reference_publication_event(data, issn):
@@ -51,7 +68,8 @@ def _get_issn_key_title(data, issn):
         nid = _get_field(node, "@id")
         if nid == pattern:
             if "value" in node:
-                return node["value"]
+                value = node["value"]
+                return _clean_up(value)
 
 
 def _get_issn_record_field(data, issn, field):
@@ -95,9 +113,7 @@ def _get_title(data, issn):
     response_graph_data = _get_issn_fields(response_graph, issn)
     if response_graph_data and "mainTitle" in response_graph_data:
         main_title = response_graph_data["mainTitle"]
-        main_title = main_title.strip(".")
-        main_title = main_title.strip()
-        return main_title
+        return _clean_up(main_title)
 
 
 def _get_format(data, issn):
@@ -118,9 +134,10 @@ def _get_url(data, issn):
 
 class Parser:
 
-    def __init__(self, data, issn):
+    def __init__(self, data, issn, linking=False):
         self.id = issn
         self.raw = data
+        self.linking = linking
 
     def graph(self):
         return _get_graph(self.raw)
@@ -128,38 +145,56 @@ class Parser:
     def context(self):
         return _get_context(self.raw)
 
+    def get_name(self):
+        if self.linking:
+            return _get_issn_l_name(self.raw, self.id)
+
     def get_title(self):
-        return _get_title(self.raw, self.id)
+        if not self.linking:
+            return _get_title(self.raw, self.id)
 
     def get_key_title(self):
-        return _get_issn_key_title(self.raw, self.id)
+        if not self.linking:
+            return _get_issn_key_title(self.raw, self.id)
 
     def get_issn_l(self):
         return _get_issn_l(self.raw, self.id)
 
     def get_url(self):
-        return _get_url(self.raw, self.id)
+        if not self.linking:
+            return _get_url(self.raw, self.id)
 
     def get_location(self):
-        return _get_location(self.raw, self.id)
+        if not self.linking:
+            return _get_location(self.raw, self.id)
 
     def get_format(self):
         return _get_format(self.raw, self.id)
 
     def get_status(self):
-        return _get_issn_record_status(self.raw, self.id)
+        if not self.linking:
+            return _get_issn_record_status(self.raw, self.id)
 
     def get_modified(self):
-        return _get_issn_record_modified_iso(self.raw, self.id)
+        if not self.linking:
+            return _get_issn_record_modified_iso(self.raw, self.id)
 
     def parse(self):
-        return {
-          "issn": self.id,
-          "issn_l": self.get_issn_l(),
-          "title": self.get_key_title(),
-          "format": self.get_format(),
-          "location": self.get_location(),
-          "status": self.get_status(),
-          "modified": self.get_modified(),
-          "url": self.get_url()
-        }
+        if self.linking:
+            return {
+              "issn": self.id,
+              "issn_l": self.get_issn_l(),
+              "title": self.get_name(),
+              "format": self.get_format()
+            }
+        else:
+            return {
+              "issn": self.id,
+              "issn_l": self.get_issn_l(),
+              "title": self.get_title(),
+              "format": self.get_format(),
+              "location": self.get_location(),
+              "status": self.get_status(),
+              "modified": self.get_modified(),
+              "url": self.get_url()
+            }

@@ -11,7 +11,7 @@ def build_url(issn):
 
 
 def build_url_l(issn_l):
-    return "{0}/{1}?format=json".format(URL_BASE_ISSN, issn_l)
+    return "{0}/{1}?format=json".format(URL_BASE_ISSN_L, issn_l)
 
 
 def request(issn, linking=False):
@@ -21,4 +21,4 @@ def request(issn, linking=False):
         url = build_url_l(issn)
     payload = utils.json_request(url)
     if payload is not None:
-        return Parser(payload, issn)
+        return Parser(payload, issn, linking=linking)

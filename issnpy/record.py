@@ -176,8 +176,8 @@ class ParserIssn(Parser):
         if not self.raw:
             return None
         return {
-          "issn": self.id,
-          "issn_l": self.get_issn_l(),
+          "id": self.id,
+          "link": self.get_issn_l(),
           "title": self.get_title(),
           "format": self.get_format(),
           "location": self.get_location(),
@@ -232,7 +232,7 @@ class ParserIssnL(Parser):
         if not self.raw:
             return None
         return {
-          "issn_l": self.get_issn_l(),
+          "id": self.get_issn_l(),
           "related": self.get_issns(),
           "title": self.get_name()
           }

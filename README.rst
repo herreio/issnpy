@@ -46,7 +46,7 @@ Usage Example
     record_parsed = record.parse()
     # fetch and parse in one go
     record_parsed = issnpy.record(issn)
-    record_parsed = issnpy.link(issn_l)
+    record_parsed = issnpy.record_link(issn_l)
 
 Source Data
 ===========

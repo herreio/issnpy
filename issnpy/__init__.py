@@ -7,4 +7,4 @@ __author__ = "Donatus Herre <donatus.herre@slub-dresden.de>"
 __version__ = "0.0.0"
 
 from .client import request as fetch
-from .client import record, link, find_link
+from .client import record, record_link, find_link

@@ -39,7 +39,7 @@ def record(issn):
     return request(issn, link=False, parse=True)
 
 
-def link(issn):
+def record_link(issn):
     return request(issn, link=True, parse=True)
 
 

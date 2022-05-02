@@ -79,3 +79,11 @@ class Parser:
 
     def get_url(self):
         return _get_url(self.raw, self.id)
+
+    def parse(self):
+        return {
+          "issn": self.id,
+          "issn_l": self.get_issn_l(),
+          "title": self.get_key_title(),
+          "url": self.get_url()
+        }

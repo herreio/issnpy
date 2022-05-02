@@ -2,7 +2,7 @@
 issnpy
 ======
 
-``issnpy`` is a Python package that allows to access linked open data from the ISSN Portal.
+``issnpy`` is a Python package that allows to access linked data from the ISSN Portal.
 
 Installation
 ============

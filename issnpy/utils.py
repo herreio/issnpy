@@ -25,10 +25,10 @@ def get_logger(name="issnpy", loglevel=None):
 
 
 def validate(issn):
-    issn = stdnum.issn.format(issn)
+    issnf = stdnum.issn.format(issn)
     try:
-        issn = stdnum.issn.validate(issn)
-        return stdnum.issn.format(issn)
+        issnf = stdnum.issn.validate(issnf)
+        return stdnum.issn.format(issnf)
     except stdnum.exceptions.ValidationError:
         logger = get_logger()
         logger.error("Saw invalid ISSN {0}!".format(issn))

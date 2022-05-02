@@ -1,3 +1,6 @@
+import datetime
+
+
 def _get_field(data, name):
     if name in data:
         if data[name]:
@@ -29,6 +32,34 @@ def _get_issn_key_title(data, issn):
         if nid == pattern:
             if "value" in node:
                 return node["value"]
+
+
+def _get_issn_record_field(data, issn, field):
+    response_graph = _get_graph(data)
+    pattern = "resource/ISSN/{0}#Record".format(issn)
+    for node in response_graph:
+        nid = _get_field(node, "@id")
+        if nid == pattern:
+            if field in node:
+                return node[field]
+
+
+def _get_issn_record_modified(data, issn):
+    return _get_issn_record_field(data, issn, "modified")
+
+
+def _get_issn_record_modified_iso(data, issn):
+    record_modified = _get_issn_record_modified(data, issn)
+    if record_modified is not None:
+        dt = datetime.datetime.strptime(record_modified, "%Y%m%d%H%M%S.0")
+        return dt.isoformat()
+
+
+def _get_issn_record_status(data, issn):
+    record_status = _get_issn_record_field(data, issn, "status")
+    if record_status is not None:
+        record_status = record_status.replace("vocabularies/RecordStatus#", "")
+        return record_status
 
 
 def _get_issn_fields(data, issn):
@@ -92,11 +123,19 @@ class Parser:
     def get_format(self):
         return _get_format(self.raw, self.id)
 
+    def get_status(self):
+        return _get_issn_record_status(self.raw, self.id)
+
+    def get_modified(self):
+        return _get_issn_record_modified_iso(self.raw, self.id)
+
     def parse(self):
         return {
           "issn": self.id,
           "issn_l": self.get_issn_l(),
           "title": self.get_key_title(),
           "format": self.get_format(),
+          "status": self.get_status(),
+          "modified": self.get_modified(),
           "url": self.get_url()
         }

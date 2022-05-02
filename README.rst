@@ -36,7 +36,7 @@ Usage Example
     record_graph = record.graph()
     # get linked open data context
     record_context = record.context()
-    # get parsed data of record (issn, issn_l, title, format, url)
+    # get parsed data of record (issn, issn_l, title, format, status, modified, url)
     record_parsed = record.parse()
 
 Usage Terms

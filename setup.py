@@ -12,4 +12,7 @@ setup(
     url="https://github.com/herreio/issnpy",
     packages=["issnpy"],
     install_requires=["requests", "stdnum"],
+    entry_points={
+      'console_scripts': ['ISSN = issnpy.__main__:main'],
+    },
 )

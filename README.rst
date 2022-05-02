@@ -30,8 +30,6 @@ Usage Example
     import issnpy
     # select ISSN of record to fetch
     issn = "2767-3200"
-    # retrieve linking ISSN for given ISSN
-    issn_l = issnpy.link(issn)
     # fetch data of record identified by ISSN
     record = issnpy.fetch(issn)
     # get linked open data graph
@@ -40,8 +38,10 @@ Usage Example
     record_context = record.context()
     # get parsed data of record (issn, issn_l, title, format, location, status, modified, url)
     record_parsed = record.parse()
+    # retrieve linking ISSN for given ISSN
+    issn_l = issnpy.link(issn)
     # fetch data of record identified by ISSN-L
-    record = issnpy.fetch(issn, linking=True)
+    record = issnpy.fetch(issn_l, linking=True)
     # get parsed data of record (issn, issn_l, title, format)
     record_parsed = record.parse()
 

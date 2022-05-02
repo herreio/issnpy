@@ -2,6 +2,7 @@ import json
 import logging
 import requests
 import stdnum.issn
+import stdnum.exceptions
 
 from . import __version__
 
@@ -28,7 +29,7 @@ def validate(issn):
     try:
         issn = stdnum.issn.validate(issn)
         return stdnum.issn.format(issn)
-    except stdnum.exception.ValidationError:
+    except stdnum.exceptions.ValidationError:
         logger = get_logger()
         logger.error("Saw invalid ISSN {0}!".format(issn))
         return None

@@ -2,7 +2,7 @@
 issnpy
 ======
 
-``issnpy`` is a Python package that allows to access linked data from the ISSN Portal.
+``issnpy`` is a Python package that allows to access linked data from the `ISSN Portal <https://portal.issn.org>`_.
 
 Installation
 ============
@@ -50,6 +50,10 @@ Usage Example
 
 Source Data
 ===========
+
+    Identification and description data from the ISSN Register has been made
+    available as linked data, in various RDF formats (RDF/XML, Turtle and JSON).
+    This service shall foster the use, re-use, exchange and enrichment of ISSN data.
 
 See the `linked data application profile <https://www.issn.org/understanding-the-issn/assignment-rules/issn-linked-data-application-profile/>`_
 of the CIEPS/ISSN International Centre for further details.

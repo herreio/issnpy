@@ -80,7 +80,7 @@ CIEPS/ISSN International Centre
     - Country
     - Medium
     - URL of the digital resource
-    - Date of last update.
+    - Date of last update
 
     ...
 

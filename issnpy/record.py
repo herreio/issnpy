@@ -8,7 +8,7 @@ def _clean_up(char):
 
 
 def _get_field(data, name):
-    if name in data:
+    if data and name in data:
         if data[name]:
             return data[name]
 
@@ -23,6 +23,8 @@ def _get_context(data):
 
 def _get_issn_l(data, issn):
     response_graph = _get_graph(data)
+    if response_graph is None:
+        return None
     pattern = "resource/ISSN-L/"
     for node in response_graph:
         nid = _get_field(node, "@id")
@@ -32,6 +34,8 @@ def _get_issn_l(data, issn):
 
 def _get_issn_l_name(data, issn):
     response_graph = _get_graph(data)
+    if response_graph is None:
+        return None
     pattern = "resource/ISSN-L/{0}".format(issn)
     for node in response_graph:
         nid = _get_field(node, "@id")
@@ -43,6 +47,8 @@ def _get_issn_l_name(data, issn):
 
 def _get_issn_reference_publication_event(data, issn):
     response_graph = _get_graph(data)
+    if response_graph is None:
+        return None
     pattern = "resource/ISSN/{0}#ReferencePublicationEvent".format(issn)
     for node in response_graph:
         nid = _get_field(node, "@id")
@@ -53,6 +59,8 @@ def _get_issn_reference_publication_event(data, issn):
 
 def _get_location(data, issn):
     response_graph = _get_graph(data)
+    if response_graph is None:
+        return None
     pattern = _get_issn_reference_publication_event(data, issn)
     for node in response_graph:
         nid = _get_field(node, "@id")
@@ -63,6 +71,8 @@ def _get_location(data, issn):
 
 def _get_issn_key_title(data, issn):
     response_graph = _get_graph(data)
+    if response_graph is None:
+        return None
     pattern = "resource/ISSN/{0}#KeyTitle".format(issn)
     for node in response_graph:
         nid = _get_field(node, "@id")
@@ -74,6 +84,8 @@ def _get_issn_key_title(data, issn):
 
 def _get_issn_record_field(data, issn, field):
     response_graph = _get_graph(data)
+    if response_graph is None:
+        return None
     pattern = "resource/ISSN/{0}#Record".format(issn)
     for node in response_graph:
         nid = _get_field(node, "@id")
@@ -101,6 +113,8 @@ def _get_issn_record_status(data, issn):
 
 
 def _get_issn_fields(data, issn):
+    if data is None:
+        return None
     pattern = "resource/ISSN/{0}".format(issn)
     for d in data:
         did = _get_field(d, "@id")
@@ -111,6 +125,8 @@ def _get_issn_fields(data, issn):
 def _get_issns(data):
     issns = []
     response_graph = _get_graph(data)
+    if response_graph is None:
+        return None
     pattern = "resource/ISSN/"
     for node in response_graph:
         nid = _get_field(node, "@id")
@@ -127,6 +143,8 @@ def _get_issns(data):
 
 def _get_title(data, issn):
     response_graph = _get_graph(data)
+    if response_graph is None:
+        return None
     node = _get_issn_fields(response_graph, issn)
     if node and "mainTitle" in node:
         main_title = node["mainTitle"]
@@ -135,6 +153,8 @@ def _get_title(data, issn):
 
 def _get_format(data, issn):
     response_graph = _get_graph(data)
+    if response_graph is None:
+        return None
     node = _get_issn_fields(response_graph, issn)
     if node and "format" in node:
         title_format = node["format"]
@@ -144,6 +164,8 @@ def _get_format(data, issn):
 
 def _get_url(data, issn):
     response_graph = _get_graph(data)
+    if response_graph is None:
+        return None
     node = _get_issn_fields(response_graph, issn)
     if node and "url" in node:
         return node["url"]
@@ -202,6 +224,8 @@ class Parser:
             return _get_issn_record_modified_iso(self.raw, self.id)
 
     def parse(self):
+        if not self.raw:
+            return None
         if self.linking:
             return {
               "issn_l": self.get_issn_l(),

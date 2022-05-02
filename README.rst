@@ -33,7 +33,14 @@ Usage Example
 .. code-block:: python
 
     issn = "2767-3200"
-    lod = issnpy.fetch(issn)
+    # fetch data of record identfied by ISSN
+    record = issnpy.fetch(issn)
+    # get linked open data graph
+    record_graph = record.get_graph()
+    # get linked open data context
+    record_context = record.get_context()
+    # get parsed data of record (issn, issn_l, title, url)
+    record_parsed = record.parse()
 
 Usage Terms
 ===========

@@ -11,5 +11,5 @@ setup(
     license="GPLv3",
     url="https://github.com/herreio/issnpy",
     packages=["issnpy"],
-    install_requires=["requests"],
+    install_requires=["requests", "stdnum"],
 )

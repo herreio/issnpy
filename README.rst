@@ -33,7 +33,7 @@ Usage Example
 .. code-block:: python
 
     issn = "2767-3200"
-    # fetch data of record identfied by ISSN
+    # fetch data of record identified by ISSN
     record = issnpy.fetch(issn)
     # get linked open data graph
     record_graph = record.get_graph()

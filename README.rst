@@ -26,19 +26,16 @@ Usage Example
 
 .. code-block:: python
 
+    # import package issnpy
     import issnpy
-
-*Retrieve journal metadata via ISSN*
-
-.. code-block:: python
-
+    # select ISSN of record to fetch
     issn = "2767-3200"
     # fetch data of record identified by ISSN
     record = issnpy.fetch(issn)
     # get linked open data graph
-    record_graph = record.get_graph()
+    record_graph = record.graph()
     # get linked open data context
-    record_context = record.get_context()
+    record_context = record.context()
     # get parsed data of record (issn, issn_l, title, url)
     record_parsed = record.parse()
 

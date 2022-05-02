@@ -36,13 +36,13 @@ Usage Example
     record_graph = record.graph()
     # get linked data context
     record_context = record.context()
-    # get parsed data of record (issn, issn_l, title, format, location, status, modified, url)
+    # get parsed data of record (id, link, title, format, location, status, modified, url)
     record_parsed = record.parse()
     # retrieve linking ISSN for given ISSN
     issn_l = issnpy.find_link(issn)
     # fetch data of record identified by ISSN-L
     record = issnpy.fetch(issn_l, link=True)
-    # get parsed data of record (issn_l, related, title)
+    # get parsed data of record (id, related, title)
     record_parsed = record.parse()
     # fetch and parse in one go
     record_parsed = issnpy.record(issn)

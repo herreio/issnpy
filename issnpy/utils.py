@@ -55,8 +55,6 @@ def response_json(response):
             logger = get_logger()
             logger.error(
                 "Failed to parse JSON data retrieved from URL {0}".format(response.url))
-            if response.text:
-                logger.error("Found payload: {0}".format(response.text))
 
 
 def json_request(url, headers={}):

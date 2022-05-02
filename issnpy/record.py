@@ -49,6 +49,15 @@ def _get_title(data, issn):
         return main_title
 
 
+def _get_format(data, issn):
+    response_graph = _get_graph(data)
+    response_graph_data = _get_issn_fields(response_graph, issn)
+    if response_graph_data and "format" in response_graph_data:
+        title_format = response_graph_data["format"]
+        title_format = title_format.replace("vocabularies/medium#", "")
+        return title_format
+
+
 def _get_url(data, issn):
     response_graph = _get_graph(data)
     response_graph_data = _get_issn_fields(response_graph, issn)
@@ -80,10 +89,14 @@ class Parser:
     def get_url(self):
         return _get_url(self.raw, self.id)
 
+    def get_format(self):
+        return _get_format(self.raw, self.id)
+
     def parse(self):
         return {
           "issn": self.id,
           "issn_l": self.get_issn_l(),
           "title": self.get_key_title(),
+          "format": self.get_format(),
           "url": self.get_url()
         }

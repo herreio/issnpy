@@ -32,9 +32,9 @@ Usage Example
     issn = "2767-3200"
     # fetch data of record identified by ISSN
     record = issnpy.fetch(issn)
-    # get linked open data graph
+    # get linked data graph
     record_graph = record.graph()
-    # get linked open data context
+    # get linked data context
     record_context = record.context()
     # get parsed data of record (issn, issn_l, title, format, location, status, modified, url)
     record_parsed = record.parse()

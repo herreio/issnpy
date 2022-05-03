@@ -30,10 +30,16 @@ Command Line
 
 .. code-block:: shell
 
-    # fetch metadata of journal given by ISSN
+    # fetch ISSN data (JSON, fields: id, link, title, format, location, status, modified, url)
     ISSN "2151-2124"
-    # fetch metadata of journal given by ISSN-L
+    # fetch ISSN data  (JSON-LD)
+    ISSN "2151-2124" --ld
+    # fetch ISSN-L data (JSON, fields: id, related, title)
     ISSN-L "0269-8803"
+    # fetch ISSN-L data (JSON-LD)
+    ISSN "2151-2124" --ld
+
+Use the ``--pretty`` flag for formatted JSON output.
 
 Interpreter
 ~~~~~~~~~~~
@@ -50,13 +56,13 @@ Interpreter
     record_graph = record.graph()
     # get linked data context
     record_context = record.context()
-    # get parsed data of record (id, link, title, format, location, status, modified, url)
+    # get parsed data of record (fields: id, link, title, format, location, status, modified, url)
     record_parsed = record.parse()
     # retrieve linking ISSN for given ISSN
     issn_l = issnpy.find_link(issn)
     # fetch data of record identified by ISSN-L
     record = issnpy.fetch(issn_l, link=True)
-    # get parsed data of record (id, related, title)
+    # get parsed data of record (fields: id, related, title)
     record_parsed = record.parse()
     # fetch and parse in one go
     record_parsed = issnpy.record(issn)

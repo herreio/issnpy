@@ -192,7 +192,9 @@ class ParserIssn(Parser):
         if parsed is not None:
             if header:
                 csv_data.append(list(parsed.keys()))
-            csv_data.append(list(v if v else "" for v in parsed.values()))
+            row = list(v if v else "" for v in parsed.values())
+            row = ["|".join(r) if isinstance(r, list) else r for r in row]
+            csv_data.append(row)
         if len(csv_data) > 0:
             return csv_data
 

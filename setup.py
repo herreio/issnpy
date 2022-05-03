@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="issnpy",
-    version="0.1.0",
+    version="0.1.1",
     author="Donatus Herre",
     author_email="donatus.herre@slub-dresden.de",
     description="ISSN Portal LD Client",

@@ -13,14 +13,14 @@ Installation
 
 .. code-block:: bash
 
-   pip install -e git+ssh://git@github.com/herreio/issnpy.git#egg=issnpy
+   pip install git+ssh://git@github.com/herreio/issnpy.git
 
 ... or via HTTPS
 ~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
-   pip install -e git+https://github.com/herreio/issnpy.git#egg=issnpy
+   pip install git+https://github.com/herreio/issnpy.git
 
 Usage Example
 =============

@@ -13,6 +13,7 @@ setup(
     packages=["issnpy"],
     install_requires=["requests", "python-stdnum"],
     entry_points={
-      'console_scripts': ['ISSN = issnpy.__main__:main'],
+      'console_scripts': ['ISSN = issnpy.__main__:main',
+                          'ISSN-L = issnpy.__main__:main_link'],
     },
 )

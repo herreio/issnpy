@@ -64,7 +64,7 @@ class ParserIssn(Parser):
             if did == pattern:
                 return d
 
-    def _get_title(self):
+    def _get_main_title(self):
         response_graph = self._get_graph()
         if response_graph is None:
             return None
@@ -90,6 +90,14 @@ class ParserIssn(Parser):
         node = self._get_issn_fields()
         if node and "url" in node:
             return node["url"]
+
+    def _get_name(self):
+        response_graph = self._get_graph()
+        if response_graph is None:
+            return None
+        node = self._get_issn_fields()
+        if node and "name" in node:
+            return node["name"]
 
     def _get_issn_reference_publication_event(self):
         response_graph = self._get_graph()
@@ -151,14 +159,18 @@ class ParserIssn(Parser):
             record_status = record_status.replace("vocabularies/RecordStatus#", "")
             return record_status
 
-    def get_title(self):
-        return self._get_title()
+    def get_main_title(self):
+        return self._get_main_title()
 
     def get_key_title(self):
         return self._get_issn_key_title()
 
     def get_url(self):
         return self._get_url()
+
+    def get_name(self):
+        """str OR list"""
+        return self._get_name()
 
     def get_location(self):
         return self._get_location()
@@ -178,7 +190,7 @@ class ParserIssn(Parser):
         return {
           "id": self.id,
           "link": self.get_issn_l(),
-          "title": self.get_title(),
+          "title": self.get_key_title(),
           "format": self.get_format(),
           "location": self.get_location(),
           "status": self.get_status(),

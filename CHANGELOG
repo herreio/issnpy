@@ -1,3 +1,7 @@
+0.1.2 [2022-05-03]
+
+- add argument --ld to cli
+
 0.1.1 [2022-05-03]
 
 - add CSV parsing method

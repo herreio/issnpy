@@ -32,7 +32,7 @@ Command Line
 
     # fetch ISSN data (JSON, fields: id, link, title, format, location, status, modified, url)
     ISSN "2151-2124"
-    # fetch ISSN data  (JSON-LD)
+    # fetch ISSN data (JSON-LD)
     ISSN "2151-2124" --ld
     # fetch ISSN-L data (JSON, fields: id, related, title)
     ISSN-L "0269-8803"

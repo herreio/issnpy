@@ -186,6 +186,16 @@ class ParserIssn(Parser):
           "url": self.get_url()
           }
 
+    def to_csv(self, header=False):
+        csv_data = []
+        parsed = self.parse()
+        if parsed is not None:
+            if header:
+                csv_data.append(list(parsed.keys()))
+            csv_data.append(list(v if v else "" for v in parsed.values()))
+        if len(csv_data) > 0:
+            return csv_data
+
 
 class ParserIssnL(Parser):
 

@@ -2,7 +2,8 @@
 issnpy
 ======
 
-``issnpy`` is a Python package that allows to access linked data from the `ISSN Portal <https://portal.issn.org>`_.
+``issnpy`` is a Python package and command line tool that allows to access
+linked data from the `ISSN Portal <https://portal.issn.org>`_.
 
 Installation
 ============
@@ -23,6 +24,19 @@ Installation
 
 Usage Example
 =============
+
+Command Line
+~~~~~~~~~~~~
+
+.. code-block:: shell
+
+    # fetch metadata of journal given by ISSN
+    ISSN "2151-2124"
+    # fetch metadata of journal given by ISSN-L
+    ISSN-L "0269-8803"
+
+Interpreter
+~~~~~~~~~~~
 
 .. code-block:: python
 

@@ -1,3 +1,7 @@
+0.1.7 [2022-06-29]
+
+- handle multiple format values in Parsers
+
 0.1.6 [2022-06-29]
 
 - fix AttributeError in ParserIssn._get_format

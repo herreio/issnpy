@@ -150,8 +150,15 @@ class ParserIssn(Parser):
     def _get_issn_record_modified_iso(self):
         record_modified = self._get_issn_record_modified()
         if record_modified is not None:
-            dt = datetime.datetime.strptime(record_modified, "%Y%m%d%H%M%S.0")
-            return dt.isoformat()
+            try:
+                dt = datetime.datetime.strptime(record_modified, "%Y%m%d%H%M%S.0")
+            except ValueError:
+                try:
+                    dt = datetime.datetime.strptime(record_modified, "%Y%m%d%H%M%S.%f")
+                except ValueError:
+                    dt = None
+            if isinstance(dt, datetime.datetime):
+                return dt.isoformat()
 
     def _get_issn_record_status(self):
         record_status = self._get_issn_record_field("status")

@@ -74,7 +74,7 @@ class ParserIssn(Parser):
             main_title = node["mainTitle"]
             return self._clean_str(main_title)
 
-    def _get_format(self, joined=False):
+    def _get_format(self):
         response_graph = self._get_graph()
         if response_graph is None:
             return None
@@ -85,11 +85,8 @@ class ParserIssn(Parser):
                 title_format = title_format.replace("vocabularies/medium#", "")
                 return title_format
             elif isinstance(title_format, list):
-                title_format = [tf.replace("vocabularies/medium#", "")
-                                for tf in title_format]
-                if joined:
-                    title_format = "|".join(title_format)
-                return title_format
+                return [tf.replace("vocabularies/medium#", "")
+                        for tf in title_format]
 
     def _get_url(self):
         response_graph = self._get_graph()
@@ -139,7 +136,11 @@ class ParserIssn(Parser):
             if nid == pattern:
                 if "value" in node:
                     value = node["value"]
-                    return self._clean_str(value)
+                    if isinstance(value, str):
+                        return self._clean_str(value)
+                    elif isinstance(value, list):
+                        values = [self._clean_str(v) for v in value]
+                        return values
 
     def _get_issn_record_field(self, field):
         response_graph = self._get_graph()
@@ -190,8 +191,8 @@ class ParserIssn(Parser):
     def get_location(self):
         return self._get_location()
 
-    def get_format(self, joined=False):
-        return self._get_format(joined=joined)
+    def get_format(self):
+        return self._get_format()
 
     def get_status(self):
         return self._get_issn_record_status()
@@ -199,14 +200,14 @@ class ParserIssn(Parser):
     def get_modified(self):
         return self._get_issn_record_modified_iso()
 
-    def parse(self, joined=False):
+    def parse(self):
         if not self.raw:
             return None
         return {
           "id": self.id,
           "link": self.get_issn_l(),
           "title": self.get_key_title(),
-          "format": self.get_format(joined=joined),
+          "format": self.get_format(),
           "location": self.get_location(),
           "status": self.get_status(),
           "modified": self.get_modified(),
@@ -215,7 +216,7 @@ class ParserIssn(Parser):
 
     def to_csv(self, header=False):
         csv_data = []
-        parsed = self.parse(joined=True)
+        parsed = self.parse()
         if parsed is not None:
             if header:
                 csv_data.append(list(parsed.keys()))
@@ -231,7 +232,7 @@ class ParserIssnL(Parser):
     def __init__(self, data, issn):
         super().__init__(data, issn)
 
-    def _get_issns(self, joined=False):
+    def _get_issns(self):
         issns = []
         response_graph = self._get_graph()
         if response_graph is None:
@@ -249,8 +250,6 @@ class ParserIssnL(Parser):
                     elif isinstance(title_format, list):
                         title_format = [tf.replace("vocabularies/medium#", "")
                                         for tf in title_format]
-                        if joined:
-                            title_format = "|".join(title_format)
                 issns.append({"id": title_issn, "format": title_format})
         if len(issns) > 0:
             return issns
@@ -270,14 +269,14 @@ class ParserIssnL(Parser):
     def get_name(self):
         return self._get_issn_l_name()
 
-    def get_issns(self, joined=False):
-        return self._get_issns(joined=joined)
+    def get_issns(self):
+        return self._get_issns()
 
-    def parse(self, joined=False):
+    def parse(self):
         if not self.raw:
             return None
         return {
           "id": self.get_issn_l(),
-          "related": self.get_issns(joined=joined),
+          "related": self.get_issns(),
           "title": self.get_name()
           }

@@ -74,7 +74,7 @@ class ParserIssn(Parser):
             main_title = node["mainTitle"]
             return self._clean_str(main_title)
 
-    def _get_format(self):
+    def _get_format(self, joined=False):
         response_graph = self._get_graph()
         if response_graph is None:
             return None
@@ -84,12 +84,12 @@ class ParserIssn(Parser):
             if isinstance(title_format, str):
                 title_format = title_format.replace("vocabularies/medium#", "")
                 return title_format
-            logger = utils.get_logger()
-            msg_raw = "Found unexpected type {0} for field 'format' in record {1}"
-            msg = msg_raw.format(type(title_format), self.id)
-            logger.warning(msg)
-            msg = str(title_format)
-            logger.warning(title_format)
+            elif isinstance(title_format, list):
+                title_format = [tf.replace("vocabularies/medium#", "")
+                                for tf in title_format]
+                if joined:
+                    title_format = "|".join(title_format)
+                return title_format
 
     def _get_url(self):
         response_graph = self._get_graph()
@@ -190,8 +190,8 @@ class ParserIssn(Parser):
     def get_location(self):
         return self._get_location()
 
-    def get_format(self):
-        return self._get_format()
+    def get_format(self, joined=False):
+        return self._get_format(joined=joined)
 
     def get_status(self):
         return self._get_issn_record_status()
@@ -199,14 +199,14 @@ class ParserIssn(Parser):
     def get_modified(self):
         return self._get_issn_record_modified_iso()
 
-    def parse(self):
+    def parse(self, joined=False):
         if not self.raw:
             return None
         return {
           "id": self.id,
           "link": self.get_issn_l(),
           "title": self.get_key_title(),
-          "format": self.get_format(),
+          "format": self.get_format(joined=joined),
           "location": self.get_location(),
           "status": self.get_status(),
           "modified": self.get_modified(),
@@ -215,7 +215,7 @@ class ParserIssn(Parser):
 
     def to_csv(self, header=False):
         csv_data = []
-        parsed = self.parse()
+        parsed = self.parse(joined=True)
         if parsed is not None:
             if header:
                 csv_data.append(list(parsed.keys()))
@@ -231,7 +231,7 @@ class ParserIssnL(Parser):
     def __init__(self, data, issn):
         super().__init__(data, issn)
 
-    def _get_issns(self):
+    def _get_issns(self, joined=False):
         issns = []
         response_graph = self._get_graph()
         if response_graph is None:
@@ -244,7 +244,13 @@ class ParserIssnL(Parser):
                 title_format = None
                 if "format" in node:
                     title_format = node["format"]
-                    title_format = title_format.replace("vocabularies/medium#", "")
+                    if isinstance(title_format, str):
+                        title_format = title_format.replace("vocabularies/medium#", "")
+                    elif isinstance(title_format, list):
+                        title_format = [tf.replace("vocabularies/medium#", "")
+                                        for tf in title_format]
+                        if joined:
+                            title_format = "|".join(title_format)
                 issns.append({"id": title_issn, "format": title_format})
         if len(issns) > 0:
             return issns
@@ -264,14 +270,14 @@ class ParserIssnL(Parser):
     def get_name(self):
         return self._get_issn_l_name()
 
-    def get_issns(self):
-        return self._get_issns()
+    def get_issns(self, joined=False):
+        return self._get_issns(joined=joined)
 
-    def parse(self):
+    def parse(self, joined=False):
         if not self.raw:
             return None
         return {
           "id": self.get_issn_l(),
-          "related": self.get_issns(),
+          "related": self.get_issns(joined=joined),
           "title": self.get_name()
           }

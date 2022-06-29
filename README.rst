@@ -37,7 +37,7 @@ Command Line
     # fetch ISSN-L data (JSON, fields: id, related, title)
     ISSN-L "0269-8803"
     # fetch ISSN-L data (JSON-LD)
-    ISSN "2151-2124" --ld
+    ISSN-L "0269-8803" --ld
 
 Use the ``--pretty`` flag for formatted JSON output.
 

@@ -1,6 +1,11 @@
+0.1.6 [2022-06-29]
+
+- fix AttributeError in ParserIssn._get_format
+- fix InvalidFormat exception in utils.validate
+
 0.1.5 [2022-06-29]
 
-- fix AttributeError in _clean_str
+- fix AttributeError in ParserIssn._clean_str
 
 0.1.4 [2022-06-29]
 

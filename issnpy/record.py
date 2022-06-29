@@ -10,8 +10,9 @@ class Parser:
 
     @staticmethod
     def _clean_str(char):
-        char = char.strip(".")
-        char = char.strip()
+        if isinstance(char, str):
+            char = char.strip(".")
+            char = char.strip()
         return char
 
     @staticmethod

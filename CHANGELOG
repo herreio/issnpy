@@ -1,3 +1,7 @@
+0.1.8 [2022-06-29]
+
+- remove joined parameter from methods of Parsers
+
 0.1.7 [2022-06-29]
 
 - handle multiple format values in Parsers

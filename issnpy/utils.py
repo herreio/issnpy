@@ -25,8 +25,8 @@ def get_logger(name="issnpy", loglevel=None):
 
 
 def validate(issn):
-    issnf = stdnum.issn.format(issn)
     try:
+        issnf = stdnum.issn.format(issn)
         issnf = stdnum.issn.validate(issnf)
         return stdnum.issn.format(issnf)
     except stdnum.exceptions.ValidationError:

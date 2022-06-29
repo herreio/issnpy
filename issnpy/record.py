@@ -81,8 +81,15 @@ class ParserIssn(Parser):
         node = self._get_issn_fields()
         if node and "format" in node:
             title_format = node["format"]
-            title_format = title_format.replace("vocabularies/medium#", "")
-            return title_format
+            if isinstance(title_format, str):
+                title_format = title_format.replace("vocabularies/medium#", "")
+                return title_format
+            logger = utils.get_logger()
+            msg_raw = "Found unexpected type {0} for field 'format' in record {1}"
+            msg = msg_raw.format(type(title_format), self.id)
+            logger.warning(msg)
+            msg = str(title_format)
+            logger.warning(title_format)
 
     def _get_url(self):
         response_graph = self._get_graph()

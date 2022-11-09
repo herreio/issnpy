@@ -42,6 +42,7 @@ def get_request(url, params={}, headers={}):
         return requests.get(url, params=params, headers=headers)
     except requests.exceptions.RequestException as err:
         logger = get_logger()
+        logger.error("HTTP request to {0} failed!".format(url))
         logger.error(err.__class__.__name__)
         return None
 

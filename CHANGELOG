@@ -1,3 +1,7 @@
+0.1.9 [2022-11-09]
+
+- update log output in utils.get_request
+
 0.1.8 [2022-06-29]
 
 - remove joined parameter from methods of Parsers

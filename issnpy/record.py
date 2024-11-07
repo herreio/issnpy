@@ -126,6 +126,17 @@ class ParserIssn(Parser):
                 if "label" in node:
                     return node["label"]
 
+    def _get_publisher(self):
+        response_graph = self._get_graph()
+        if response_graph is None:
+            return None
+        publishers = []
+        for node in response_graph:
+            if "publisher" in node and node["publisher"] not in publishers:
+                publishers.append(node["publisher"])
+        if len(publishers) > 0:
+            return "|".join(publishers)
+
     def _get_issn_key_title(self):
         response_graph = self._get_graph()
         if response_graph is None:
@@ -190,6 +201,9 @@ class ParserIssn(Parser):
 
     def get_location(self):
         return self._get_location()
+
+    def get_publisher(self):
+        return self._get_publisher()
 
     def get_format(self):
         return self._get_format()

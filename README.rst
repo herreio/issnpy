@@ -101,7 +101,20 @@ CIEPS/ISSN International Centre
     - Medium
     - URL of the digital resource
     - Date of last update
+    - Keepers Data
+
+    *“Keepers Data”*: e-journal preservation data including issues, volumes, and
+    publisher information archived by the different participating CIEPS agencies
+    named “Keepers”.
 
     ...
 
-See the `License contract of the ISSN Portal <https://portal.issn.org/content/license-contract>`_ for further details.
+    ARTICLE 2: RIGHTS AND OBLIGATIONS OF USERS
+
+    ...
+
+    2.2.2: Users of the Free Access Portal
+
+    Released ISSN Data is under licence CC-BY-NC-SA 4.0
+
+See the `General Terms and Conditions <https://portal.issn.org/content/cgu>`_ for further details.

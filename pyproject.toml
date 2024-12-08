@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "issnpy"
+authors = [
+    {name = "Donatus Herre", email = "donatus.herre@slub-dresden.de"},
+]
+description = "ISSN Portal LD Client"
+readme = "README.rst"
+license.file = "LICENSE"
+version = "0.1.9"
+dependencies = [
+  "requests",
+  "python-stdnum"
+]
+
+[project.scripts]
+ISSN = "issnpy.__main__:main"
+ISSN-L = "issnpy.__main__:main_link"
+
+[project.urls]
+Homepage = "https://github.com/herreio/issnpy"
+Repository = "https://github.com/herreio/issnpy.git"
+Issues = "https://github.com/herreio/issnpy/issues"
+Changelog = "https://github.com/herreio/issnpy/blob/main/CHANGELOG"
+
+[tool.setuptools]
+packages = ["issnpy"]

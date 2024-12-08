@@ -1,3 +1,8 @@
+0.2.0 [2024-12-08]
+
+- switch from setup.py to pyproject.toml
+- add method get_publisher to ParserIssn
+
 0.1.9 [2022-11-09]
 
 - update log output in utils.get_request

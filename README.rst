@@ -71,12 +71,25 @@ Interpreter
 Source Data
 ===========
 
+Legacy
+~~~~~~
+
     Identification and description data from the ISSN Register has been made
     available as linked data, in various RDF formats (RDF/XML, Turtle and JSON).
     This service shall foster the use, re-use, exchange and enrichment of ISSN data.
 
 See the `linked data application profile <https://www.issn.org/understanding-the-issn/assignment-rules/issn-linked-data-application-profile/>`_
 of the CIEPS/ISSN International Centre for further details.
+
+Current / Undocumented
+~~~~~~~~~~~~~~~~~~~~~~
+
+As of February 2026, ``issnpy`` interoperability tests indicate the public
+``portal.issn.org/resource/...`` endpoints provide machine-readable data via
+JSON-LD (``.jsonld`` suffix and/or ``Accept: application/ld+json``), while the
+legacy ``?format=...`` approach no longer returns JSON for this client.
+
+For current implementation context, see: `ISSN Application Profile JSON-LD context <https://github.com/sparna-git/issn-jsonld-context>`_.
 
 Usage Terms
 ===========

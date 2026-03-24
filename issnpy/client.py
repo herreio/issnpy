@@ -7,11 +7,27 @@ URL_BASE_ISSN_L = "{0}/ISSN-L".format(URL_BASE)
 
 
 def _build_url(issn):
-    return "{0}/{1}?format=json".format(URL_BASE_ISSN, issn)
+    return "{0}/{1}".format(URL_BASE_ISSN, issn)
 
 
 def _build_url_l(issn_l):
-    return "{0}/{1}?format=json".format(URL_BASE_ISSN_L, issn_l)
+    return "{0}/{1}".format(URL_BASE_ISSN_L, issn_l)
+
+
+def _build_url_jsonld(issn):
+    return "{0}.jsonld".format(_build_url(issn))
+
+
+def _build_url_l_jsonld(issn_l):
+    return "{0}.jsonld".format(_build_url_l(issn_l))
+
+
+def _request_payload(url, url_jsonld):
+    payload = utils.json_request(url_jsonld)
+    if payload is not None:
+        return payload
+    # Fallback to content negotiation when direct JSON-LD URL is unavailable.
+    return utils.json_request(url, headers={"Accept": "application/ld+json"})
 
 
 def request(issn, link=False, parse=False):
@@ -20,9 +36,11 @@ def request(issn, link=False, parse=False):
         return None
     if not link:
         url = _build_url(issn)
+        url_jsonld = _build_url_jsonld(issn)
     else:
         url = _build_url_l(issn)
-    payload = utils.json_request(url)
+        url_jsonld = _build_url_l_jsonld(issn)
+    payload = _request_payload(url, url_jsonld)
     if payload is not None:
         if link:
             issn_l_data = ParserIssnL(payload, issn)

@@ -1,3 +1,11 @@
+0.3.0 [2026-03-24]
+
+- adapt ISSN and ISSN-L retrieval to current portal JSON-LD endpoints
+- add fallback content negotiation via `Accept: application/ld+json`
+- support both legacy `@graph` and compact JSON-LD payloads in parsers
+- normalize medium and record status values in parsed output
+- add regression tests for portal compatibility
+
 0.2.0 [2024-12-08]
 
 - switch from setup.py to pyproject.toml

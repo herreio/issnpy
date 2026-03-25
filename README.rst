@@ -97,7 +97,7 @@ Usage Terms
 CIEPS/ISSN International Centre
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    DEFINITIONS
+    Definitions
 
     ...
 
@@ -122,7 +122,7 @@ CIEPS/ISSN International Centre
 
     ...
 
-    ARTICLE 2: RIGHTS AND OBLIGATIONS OF USERS
+    Article 2: Rights and Obligations of Users
 
     ...
 
@@ -130,4 +130,4 @@ CIEPS/ISSN International Centre
 
     Released ISSN Data is under licence CC-BY-NC-SA 4.0
 
-See the `General Terms and Conditions <https://portal.issn.org/content/cgu>`_ for further details.
+See the `General Terms and Conditions <https://portal.issn.org/static/files/cgu.pdf>`_ for further details.

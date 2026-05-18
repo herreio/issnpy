@@ -100,8 +100,9 @@ class Parser:
 
 class ParserIssn(Parser):
 
-    def __init__(self, data, issn):
+    def __init__(self, data, issn, legacy=False):
         super().__init__(data, issn)
+        self.legacy = legacy
 
     def _get_issn_fields(self):
         data = self._get_graph()
@@ -294,7 +295,7 @@ class ParserIssn(Parser):
     def parse(self):
         if not self.raw:
             return None
-        return {
+        parsed = {
           "id": self.id,
           "link": self.get_issn_l(),
           "title": self.get_key_title(),
@@ -304,6 +305,11 @@ class ParserIssn(Parser):
           "modified": self.get_modified(),
           "url": self.get_url()
           }
+        # The publisher is only released via the legacy publishers portal;
+        # the current portal never exposes it, so omit it there entirely.
+        if self.legacy:
+            parsed["publisher"] = self.get_publisher()
+        return parsed
 
     def to_csv(self, header=False):
         csv_data = []

@@ -9,11 +9,12 @@ def main():
     issnpy_cli.add_argument("id", type=str, help="ISSN of record to fetch")
     issnpy_cli.add_argument("--ld", type=bool, help="Get linked data (default: False)", nargs='?', const=True, default=False)
     issnpy_cli.add_argument("--pretty", type=bool, help="Pretty print output (default: False)", nargs='?', const=True, default=False)
+    issnpy_cli.add_argument("--legacy", type=bool, help="Use legacy publishers portal (default: False)", nargs='?', const=True, default=False)
     issnpy_args = issnpy_cli.parse_args()
     if issnpy_args.id is None:
         issnpy_cli.print_help()
         return None
-    rec = fetch(issnpy_args.id, link=False, parse=False)
+    rec = fetch(issnpy_args.id, link=False, parse=False, legacy=issnpy_args.legacy)
     if rec is not None:
         if issnpy_args.ld:
             output = rec.raw
@@ -30,14 +31,15 @@ def main_link():
     issnpy_cli.add_argument("id", type=str, help="ISSN-L of record to fetch")
     issnpy_cli.add_argument("--ld", type=bool, help="Get linked data (default: False)", nargs='?', const=True, default=False)
     issnpy_cli.add_argument("--pretty", type=bool, help="Pretty print output (default: False)", nargs='?', const=True, default=False)
+    issnpy_cli.add_argument("--legacy", type=bool, help="Use legacy publishers portal (default: False)", nargs='?', const=True, default=False)
     issnpy_args = issnpy_cli.parse_args()
     if issnpy_args.id is None:
         issnpy_cli.print_help()
         return None
-    link = find_link(issnpy_args.id)
+    link = find_link(issnpy_args.id, legacy=issnpy_args.legacy)
     if link != issnpy_args.id:
         return None
-    rec = fetch(issnpy_args.id, link=True, parse=False)
+    rec = fetch(issnpy_args.id, link=True, parse=False, legacy=issnpy_args.legacy)
     if rec is not None:
         if issnpy_args.ld:
             output = rec.raw

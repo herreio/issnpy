@@ -38,8 +38,19 @@ Command Line
     ISSN-L "0269-8803"
     # fetch ISSN-L data (JSON-LD)
     ISSN-L "0269-8803" --ld
+    # fetch ISSN data from the legacy publishers portal
+    ISSN "2943-0070" --legacy
+    # fetch ISSN-L data from the legacy publishers portal
+    ISSN-L "2943-0070" --legacy
 
 Use the ``--pretty`` flag for formatted JSON output.
+
+Use the ``--legacy`` flag to fetch from the legacy ``publishers.issn.org``
+subdomain (``?format=json``) instead of the current ``portal.issn.org``
+endpoints. This is an opt-in fallback for the old portal JSON-LD format and is
+useful while the current endpoints are unstable. It can be combined with
+``--ld`` and ``--pretty``. In legacy mode the parsed ISSN output also includes
+a ``publisher`` field, which the current portal does not expose.
 
 Interpreter
 ~~~~~~~~~~~

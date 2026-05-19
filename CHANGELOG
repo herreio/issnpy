@@ -1,3 +1,12 @@
+0.4.0 [2026-05-19]
+
+- add opt-in legacy mode using the publishers.issn.org `?format=json` endpoint
+- add `--legacy` flag to the ISSN and ISSN-L console scripts
+- thread `legacy` through client.request, record, record_link and find_link
+- skip the current portal endpoint in legacy ISSN-L link validation
+- expose `publisher` in parsed ISSN output in legacy mode only
+- add regression tests for legacy URL selection and graph parsing
+
 0.3.0 [2026-03-24]
 
 - adapt ISSN and ISSN-L retrieval to current portal JSON-LD endpoints

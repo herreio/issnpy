@@ -45,12 +45,9 @@ Command Line
 
 Use the ``--pretty`` flag for formatted JSON output.
 
-Use the ``--legacy`` flag to fetch from the legacy ``publishers.issn.org``
+Use the ``--legacy`` flag to fetch from the ``publishers.issn.org``
 subdomain (``?format=json``) instead of the current ``portal.issn.org``
-endpoints. This is an opt-in fallback for the old portal JSON-LD format and is
-useful while the current endpoints are unstable. It can be combined with
-``--ld`` and ``--pretty``. In legacy mode the parsed ISSN output also includes
-a ``publisher`` field, which the current portal does not expose.
+endpoints.
 
 Interpreter
 ~~~~~~~~~~~
@@ -98,7 +95,11 @@ Current / Undocumented
 As of February 2026, ``issnpy`` interoperability tests indicate the public
 ``portal.issn.org/resource/...`` endpoints provide machine-readable data via
 JSON-LD (``.jsonld`` suffix and/or ``Accept: application/ld+json``), while the
-legacy ``?format=...`` approach no longer returns JSON for this client.
+legacy ``portal.issn.org/...?format=...`` approach no longer returns JSON for
+this client. The legacy ``publishers.issn.org/resource/...?format=json``
+endpoint still serves the old graph-shaped JSON-LD and is available as an
+opt-in fallback via ``--legacy`` (see Command Line) while the current
+endpoints are unstable.
 
 For current implementation context, see: `ISSN Application Profile JSON-LD context <https://github.com/sparna-git/issn-jsonld-context>`_.
 

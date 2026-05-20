@@ -1,3 +1,10 @@
+0.4.1 [2026-05-20]
+
+- omit `title` from parsed ISSN-L output for current portal JSON-LD
+- keep `title` in parsed ISSN-L output for legacy graph payloads only
+- update README to list ISSN-L parsed fields as id, related
+- add regression test for compact ISSN-L JSON-LD without name/title
+
 0.4.0 [2026-05-19]
 
 - add opt-in legacy mode using the publishers.issn.org `?format=json` endpoint

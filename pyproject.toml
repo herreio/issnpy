@@ -10,7 +10,7 @@ authors = [
 description = "ISSN Portal LD Client"
 readme = "README.rst"
 license.file = "LICENSE"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
   "requests",
   "python-stdnum"

@@ -34,7 +34,7 @@ Command Line
     ISSN "2151-2124"
     # fetch ISSN data (JSON-LD)
     ISSN "2151-2124" --ld
-    # fetch ISSN-L data (JSON, fields: id, related, title)
+    # fetch ISSN-L data (JSON, fields: id, related)
     ISSN-L "0269-8803"
     # fetch ISSN-L data (JSON-LD)
     ISSN-L "0269-8803" --ld
@@ -60,17 +60,13 @@ Interpreter
     issn = "2767-3200"
     # fetch data of record identified by ISSN
     record = issnpy.fetch(issn)
-    # get linked data graph
-    record_graph = record.graph()
-    # get linked data context
-    record_context = record.context()
     # get parsed data of record (fields: id, link, title, format, location, status, modified, url)
     record_parsed = record.parse()
     # retrieve linking ISSN for given ISSN
     issn_l = issnpy.find_link(issn)
     # fetch data of record identified by ISSN-L
     record = issnpy.fetch(issn_l, link=True)
-    # get parsed data of record (fields: id, related, title)
+    # get parsed data of record (fields: id, related)
     record_parsed = record.parse()
     # fetch and parse in one go
     record_parsed = issnpy.record(issn)
@@ -142,4 +138,4 @@ CIEPS/ISSN International Centre
 
     Released ISSN Data is under licence CC-BY-NC-SA 4.0
 
-See the `General Terms and Conditions <https://portal.issn.org/static/files/cgu.pdf>`_ for further details.
+See the `General Terms and Conditions <https://publishers.issn.org/content/cgu>`_ for further details.

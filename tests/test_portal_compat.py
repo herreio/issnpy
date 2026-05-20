@@ -27,6 +27,15 @@ ISSN_L_COMPACT = {
     ],
 }
 
+# Current portal compact ISSN-L JSON-LD no longer exposes a name/title field.
+ISSN_L_COMPACT_NO_TITLE = {
+    "@context": {},
+    "identifiedBy": {"type": "bf:IssnL", "value": "2767-3200"},
+    "hasPart": [
+        {"format": "medium:Online", "identifier": "2767-3200"},
+    ],
+}
+
 # Legacy graph-shaped JSON-LD as served by publishers.issn.org for 2943-0070.
 ISSN_LEGACY_GRAPH = {
     "@graph": [
@@ -111,6 +120,18 @@ class TestPortalCompat(unittest.TestCase):
                 {"id": "0269-8803", "format": "Print"},
             ],
         )
+        # The current portal JSON-LD no longer exposes a title/name field.
+        self.assertNotIn("title", parsed)
+
+    def test_parser_issn_l_compact_no_title(self):
+        parsed = ParserIssnL(ISSN_L_COMPACT_NO_TITLE, "2767-3200").parse()
+        self.assertEqual(parsed["id"], "2767-3200")
+        self.assertEqual(
+            parsed["related"],
+            [{"id": "2767-3200", "format": "Online"}],
+        )
+        self.assertNotIn("title", parsed)
+        self.assertEqual(set(parsed.keys()), {"id", "related"})
 
     def test_request_prefers_jsonld_suffix_then_accept_header_fallback(self):
         with mock.patch("issnpy.client.utils.json_request", side_effect=[None, {"ok": True}]) as req:

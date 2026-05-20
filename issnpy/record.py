@@ -391,8 +391,14 @@ class ParserIssnL(Parser):
     def parse(self):
         if not self.raw:
             return None
-        return {
+        parsed = {
           "id": self.get_issn_l(),
           "related": self.get_issns(),
-          "title": self.get_name()
           }
+        # The current portal JSON-LD no longer exposes a title/name field for
+        # ISSN-L resources, so it is omitted entirely. Only graph-shaped
+        # legacy payloads can still carry a name; keep it there for
+        # backwards compatibility.
+        if self._get_graph() is not None:
+            parsed["title"] = self.get_name()
+        return parsed

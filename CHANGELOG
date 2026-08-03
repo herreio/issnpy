@@ -1,3 +1,7 @@
+0.4.2 [2026-08-03]
+
+- ignore unsupported publisher values
+
 0.4.1 [2026-05-20]
 
 - omit `title` from parsed ISSN-L output for current portal JSON-LD

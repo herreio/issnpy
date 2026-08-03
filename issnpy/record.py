@@ -185,8 +185,9 @@ class ParserIssn(Parser):
             if "publisher" in node and node["publisher"] not in publishers:
                 publishers.append(node["publisher"])
         if len(publishers) > 0:
-            publishers.sort()
-            return "|".join(publishers)
+            publishers = [p for p in publishers if isinstance(p, str)]
+            publishers = sorted(set(publishers))
+            return "|".join(publishers) if publishers else None
 
     def _get_issn_key_title(self):
         response_graph = self._get_graph()
